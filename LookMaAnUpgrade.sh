@@ -141,16 +141,14 @@ if [ "$ADver" == "" ]
 	then
 		echo Version is Actually BLANK !! - Setting It
 		dscl -u $USER -P $PASS "/Active Directory/$DOMAIN/All Domains" -merge /Computers/${CompName}$ operatingSystemVersion $version
-		# Outputs a blank line for reporting purposes
-        echo
-    else
-        if [ "${ADver}" == $version ]
-        	then
-        		echo 'Version Matches, Nothing to do'
-        	else
-        		echo 'Version Does Not Match, Updating it'
-                dscl -u $USER -P $PASS "/Active Directory/$DOMAIN/All Domains" -change /Computers/${CompName}$ operatingSystemVersion "${ADver}" $version
-        fi
+	else
+	        if [ "${ADver}" == $version ]
+	        	then
+	        		/bin/echo 'Version Matches, Nothing to do'
+	        	else
+	        		/bin/echo 'Version Does Not Match, Updating it'
+				dscl -u $USER -P $PASS "/Active Directory/$DOMAIN/All Domains" -change /Computers/${CompName}$ operatingSystemVersion "${ADver}" $version
+	        fi
 fi
 #
 SectionEnd
